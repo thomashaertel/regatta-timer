@@ -2,4 +2,11 @@
     <string name="app_name">Regatta Timer</string>
     <string name="hello_round">Hello Round World!</string>
     <string name="hello_square">Hello Square World!</string>
+    <string name="startStop">Start/Stop</string>
+    <string name="start">Start</string>
+    <string name="stop">Stop</string>
+    <string name="sync">Sync</string>
+    <string name="clear">Clear</string>
+    <string name="program">Prog</string>
+    <string name="timer">00:00</string>
 </resources>

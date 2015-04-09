@@ -3,7 +3,64 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" tools:context=".MainActivity" tools:deviceIds="wear_round">
 
-    <TextView android:id="@+id/text" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true" android:text="@string/hello_round" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/startStop"
+        android:id="@+id/startStopButton"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:clickable="false" android:onClick="onStartStopClick" />
+
+    <TextView android:id="@+id/timerInterval" android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="5,3,1,0"
+        android:layout_above="@+id/timer"
+        android:layout_alignStart="@+id/timer" />
+
+    <TextView android:id="@+id/timerMode" android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Up/Down"
+        android:layout_above="@+id/timer"
+        android:layout_alignEnd="@+id/timer" />
+
+    <TextView android:id="@+id/timer" android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/timer"
+        android:textSize="60dp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="10dp"
+        android:text="@string/program"
+        android:id="@+id/programButton"
+        android:layout_toStartOf="@+id/timer"
+        android:layout_above="@+id/syncButton"
+        android:layout_below="@+id/startStopButton" android:onClick="onProgramClick" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="10dp"
+        android:text="@string/clear"
+        android:id="@+id/clearButton"
+        android:layout_toEndOf="@+id/timer"
+        android:layout_above="@+id/syncButton"
+        android:layout_below="@+id/startStopButton"
+        android:onClick="onClearClick" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sync"
+        android:id="@+id/syncButton"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:onClick="onSyncClick" />
+
 </RelativeLayout>
