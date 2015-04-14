@@ -86,8 +86,8 @@ public class MainActivity extends Activity {
         };
     }
 
-    private RegattaCountDownTimer2 createStopWatch(long totalMillis) {
-        return new RegattaCountDownTimer2(totalMillis, 1000) {
+    private StopWatch createStopWatch(long totalMillis) {
+        return new StopWatch(totalMillis, 1000) {
 
             public void onTick(long millisCounted) {
                 long secondsCounted = millisCounted / 1000;
