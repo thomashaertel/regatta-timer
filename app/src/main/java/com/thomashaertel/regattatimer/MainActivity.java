@@ -92,8 +92,8 @@ public class MainActivity extends Activity {
 
     public void onSyncClick(View view) {
         if(mTimer != null && !mTimer.isCancelled()) {
-            if(mTimer instanceof RegattaCountDownTimer2)
-                ((RegattaCountDownTimer2) mTimer).sync();
+            if(mTimer instanceof RegattaCountDownTimer)
+                ((RegattaCountDownTimer) mTimer).sync();
         }
     }
 
@@ -124,8 +124,8 @@ public class MainActivity extends Activity {
         mTimerIntervalView.setText(mTimerInterval.getTextRes());
     }
 
-    private RegattaCountDownTimer2 createCountDownTimer(long totalMillis) {
-        return new RegattaCountDownTimer2(totalMillis, 1000) {
+    private RegattaCountDownTimer createCountDownTimer(long totalMillis) {
+        return new RegattaCountDownTimer(totalMillis, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 long secondsUntilFinished = millisUntilFinished / 1000;
