@@ -15,13 +15,11 @@
 
     <TextView android:id="@+id/timerInterval" android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="5,3,1,0"
         android:layout_above="@+id/timer"
         android:layout_alignStart="@+id/timer" />
 
     <TextView android:id="@+id/timerMode" android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Up/Down"
         android:layout_above="@+id/timer"
         android:layout_alignEnd="@+id/timer" />
 
@@ -40,7 +38,9 @@
         android:id="@+id/programButton"
         android:layout_toStartOf="@+id/timer"
         android:layout_above="@+id/syncButton"
-        android:layout_below="@+id/startStopButton" android:onClick="onProgramClick" />
+        android:layout_below="@+id/startStopButton"
+        android:onClick="onProgramClick"
+        android:longClickable="true" />
 
     <Button
         android:layout_width="wrap_content"
@@ -51,7 +51,8 @@
         android:layout_toEndOf="@+id/timer"
         android:layout_above="@+id/syncButton"
         android:layout_below="@+id/startStopButton"
-        android:onClick="onClearClick" />
+        android:onClick="onClearClick"
+        android:longClickable="true" />
 
     <Button
         android:layout_width="wrap_content"

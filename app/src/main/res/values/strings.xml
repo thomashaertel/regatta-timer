@@ -9,4 +9,10 @@
     <string name="clear">Clear</string>
     <string name="program">Prog</string>
     <string name="timer">00:00</string>
+    <string name="mode_5310">5,3,1,0</string>
+    <string name="mode_5M">5M</string>
+    <string name="mode_2M">2M</string>
+    <string name="mode_1M">1M</string>
+    <string name="mode_updown">Up/Down</string>
+    <string name="mode_infinite">Infinite</string>
 </resources>

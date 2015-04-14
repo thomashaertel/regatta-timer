@@ -42,7 +42,8 @@
         android:layout_toStartOf="@+id/timer"
         android:layout_above="@+id/syncButton"
         android:layout_below="@+id/startStopButton"
-        android:onClick="onProgramClick" />
+        android:onClick="onProgramClick"
+        android:longClickable="true" />
 
     <Button
         android:layout_width="wrap_content"
@@ -53,7 +54,8 @@
         android:layout_toEndOf="@+id/timer"
         android:layout_above="@+id/syncButton"
         android:layout_below="@+id/startStopButton"
-        android:onClick="onClearClick" />
+        android:onClick="onClearClick"
+        android:longClickable="true" />
 
     <Button
         android:layout_width="wrap_content"

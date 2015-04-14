@@ -31,6 +31,7 @@ import android.os.SystemClock;
  */
 public abstract class StopWatch implements Timer<StopWatch> {
 
+    private long mMillisLeft;
     private long mMillisCounted;
 
     /**
@@ -78,7 +79,7 @@ public abstract class StopWatch implements Timer<StopWatch> {
      */
     public synchronized final StopWatch start() {
         mCancelled = false;
-        if (mMillisInFuture <= 0) {
+        if (mMillisInFuture != -1 && mMillisLeft <= 0) {
             onFinish();
             return this;
         }
@@ -97,22 +98,26 @@ public abstract class StopWatch implements Timer<StopWatch> {
      */
     public synchronized final StopWatch resume() {
         mCancelled = false;
-        if (mMillisCounted <= 0) {
-            onFinish();
-            return this;
-        }
+        if (mMillisInFuture != -1) {
+            if(mMillisLeft <= 0) {
+                onFinish();
+                return this;
+            }
 
-        if(mStopTimeInFuture != -1) {
             mStopTimeInFuture = SystemClock.elapsedRealtime() + mMillisCounted;
         }
+
+        mStartTime = SystemClock.elapsedRealtime() - mMillisCounted;
 
         mHandler.sendMessage(mHandler.obtainMessage(MSG));
         return this;
     }
 
     public long getMillisLeft() {
-        return mMillisCounted;
+        return mMillisLeft;
     }
+
+    public long getMillisCounted() { return mMillisCounted; }
 
     public boolean isCancelled() {
         return mCancelled;
@@ -146,6 +151,7 @@ public abstract class StopWatch implements Timer<StopWatch> {
 
                 final long millisCounted = SystemClock.elapsedRealtime() - mStartTime;
                 mMillisCounted = millisCounted;
+                mMillisLeft = mStopTimeInFuture != -1 ? mStopTimeInFuture - millisCounted : -1;
 
                 if (mStopTimeInFuture != -1 && millisCounted >= mStopTimeInFuture) {
                     onFinish();
