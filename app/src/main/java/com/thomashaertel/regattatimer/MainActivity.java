@@ -2,17 +2,13 @@ package com.thomashaertel.regattatimer;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.support.wearable.view.WatchViewStub;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.ToggleButton;
-
-import java.text.SimpleDateFormat;
 
 public class MainActivity extends Activity {
-    private RegattaCountDownTimer2 mTimer;
+    private Timer<?> mTimer;
 
     private Button mStartStopButton;
     private TextView mTimerView;
@@ -36,7 +32,11 @@ public class MainActivity extends Activity {
 
     public void onStartStopClick(View view) {
         if(mTimer == null) {
-            mTimer = createTimer(mCountDownMillis);
+            if(mCountDownMillis > 0) {
+                mTimer = createCountDownTimer(mCountDownMillis);
+            } else {
+                mTimer = createStopWatch(-1);
+            }
             mTimer.start();
         } else {
             if (!mTimer.isCancelled()) {
@@ -48,8 +48,9 @@ public class MainActivity extends Activity {
     }
 
     public void onSyncClick(View view) {
-        if(mTimer != null) {
-            mTimer.sync();
+        if(mTimer != null && !mTimer.isCancelled()) {
+            if(mTimer instanceof RegattaCountDownTimer2)
+                ((RegattaCountDownTimer2) mTimer).sync();
         }
     }
 
@@ -64,11 +65,13 @@ public class MainActivity extends Activity {
     }
 
     public void onProgramClick(View view) {
-        mCountDownMillis += 60000; // one minute
-        updateTimer(mCountDownMillis);
+        if(mTimer == null) {
+            mCountDownMillis += 60000; // one minute
+            updateTimer(mCountDownMillis / 1000);
+        }
     }
 
-    private RegattaCountDownTimer2 createTimer(long totalMillis) {
+    private RegattaCountDownTimer2 createCountDownTimer(long totalMillis) {
         return new RegattaCountDownTimer2(totalMillis, 1000) {
 
             public void onTick(long millisUntilFinished) {
@@ -77,12 +80,26 @@ public class MainActivity extends Activity {
             }
 
             public void onFinish() {
-                mTimerView.setText("GO!");
+                updateTimer(0);
+                mTimer = createStopWatch(-1);
             }
         };
     }
 
-    private void updateTimer(long millis) {
-        mTimerView.setText(String.format("%02d:%02d", millis / 60, millis % 60));
+    private RegattaCountDownTimer2 createStopWatch(long totalMillis) {
+        return new RegattaCountDownTimer2(totalMillis, 1000) {
+
+            public void onTick(long millisCounted) {
+                long secondsCounted = millisCounted / 1000;
+                updateTimer(secondsCounted);
+            }
+
+            public void onFinish() {
+            }
+        };
+    }
+
+    private void updateTimer(long seconds) {
+        mTimerView.setText(String.format("%02d:%02d", seconds / 60, seconds % 60));
     }
 }

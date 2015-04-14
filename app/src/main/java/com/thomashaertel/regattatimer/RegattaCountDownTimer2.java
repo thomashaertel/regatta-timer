@@ -29,7 +29,7 @@ import android.os.SystemClock;
  * {@link #onTick(long)} takes an amount of time to execute that is significant
  * compared to the countdown interval.
  */
-public abstract class RegattaCountDownTimer2 {
+public abstract class RegattaCountDownTimer2 implements Timer<RegattaCountDownTimer2> {
 
     private long mMillisLeft;
 
