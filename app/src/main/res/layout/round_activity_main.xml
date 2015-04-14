@@ -11,48 +11,57 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
-        android:onClick="onStartStopClick" />
-
-    <TextView android:id="@+id/timerInterval" android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/timer"
-        android:layout_alignStart="@+id/timer" />
-
-    <TextView android:id="@+id/timerMode" android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/timer"
-        android:layout_alignEnd="@+id/timer" />
+        android:onClick="onStartStopClick"
+        android:background="@drawable/wear_round_button_oval"/>
 
     <TextView android:id="@+id/timer" android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/timer"
         android:textSize="60dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
+
+    <TextView android:id="@+id/timerInterval" android:layout_width="wrap_content"
+        android:text="@string/mode_5410"
+        android:paddingTop="10dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/startStopButton"
+        android:layout_alignStart="@+id/timer" />
+
+    <TextView android:id="@+id/timerMode" android:layout_width="wrap_content"
+        android:paddingTop="10dp"
+        android:text="@string/mode_repeat"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/startStopButton"
+        android:layout_alignEnd="@+id/timer" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="10dp"
+        android:textSize="15dp"
         android:text="@string/program"
         android:id="@+id/programButton"
         android:layout_toStartOf="@+id/timer"
         android:layout_above="@+id/syncButton"
         android:layout_below="@+id/startStopButton"
         android:onClick="onProgramClick"
-        android:longClickable="true" />
+        android:longClickable="true"
+        android:background="@drawable/wear_round_button_rounded"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="10dp"
+        android:textSize="15dp"
         android:text="@string/clear"
         android:id="@+id/clearButton"
         android:layout_toEndOf="@+id/timer"
         android:layout_above="@+id/syncButton"
         android:layout_below="@+id/startStopButton"
         android:onClick="onClearClick"
-        android:longClickable="true" />
+        android:longClickable="true"
+        android:background="@drawable/wear_round_button_rounded"/>
 
     <Button
         android:layout_width="wrap_content"
@@ -62,6 +71,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
-        android:onClick="onSyncClick" />
+        android:onClick="onSyncClick"
+        android:background="@drawable/wear_round_button_oval"/>
 
 </RelativeLayout>

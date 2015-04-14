@@ -6,13 +6,13 @@
     <string name="start">Start</string>
     <string name="stop">Stop</string>
     <string name="sync">Sync</string>
-    <string name="clear">Clear</string>
-    <string name="program">Prog</string>
+    <string name="clear">C\nL\nE\nA\nR</string>
+    <string name="program">P\nR\nO\nG</string>
     <string name="timer">00:00</string>
-    <string name="mode_5310">5,3,1,0</string>
+    <string name="mode_5410">5,4,1,0</string>
     <string name="mode_5M">5M</string>
-    <string name="mode_2M">2M</string>
+    <string name="mode_3M">3M</string>
     <string name="mode_1M">1M</string>
     <string name="mode_updown">Up/Down</string>
-    <string name="mode_infinite">Infinite</string>
+    <string name="mode_repeat">Repeat</string>
 </resources>

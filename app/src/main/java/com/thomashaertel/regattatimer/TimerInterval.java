@@ -4,7 +4,7 @@ package com.thomashaertel.regattatimer;
  * Created by user on 14.04.15.
  */
 public enum TimerInterval {
-    M5310(R.string.mode_5310, 50000, false), M5(R.string.mode_5M, 50000, true), M2(R.string.mode_2M, 20000, true), M1(R.string.mode_1M, 10000, true);
+    M5310(R.string.mode_5410, 300000, false), M5(R.string.mode_5M, 300000, true), M2(R.string.mode_3M, 180000, true), M1(R.string.mode_1M, 60000, true);
 
     private final int textRes;
     private final long millis;

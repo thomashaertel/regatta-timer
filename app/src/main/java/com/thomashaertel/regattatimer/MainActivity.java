@@ -101,10 +101,10 @@ public class MainActivity extends Activity {
         if(mTimer != null) {
             mTimer.cancel();
             mTimer = null;
-            mCountDownMillis = 0;
-
-            updateTimer(mCountDownMillis);
         }
+
+        mCountDownMillis = 0;
+        updateTimer(mCountDownMillis);
     }
 
     public void onClearLongClick(View view) {
@@ -114,9 +114,14 @@ public class MainActivity extends Activity {
 
     public void onProgramClick(View view) {
         if(mTimer == null) {
-            mCountDownMillis += mTimerInterval.getMillis(); // one minute
-            updateTimer(mCountDownMillis / 1000);
+            if(mCountDownMillis < TimerInterval.M5310.getMillis() || !(mTimerMode == TimerMode.REPEATING && mTimerInterval == TimerInterval.M5310)) {
+                mCountDownMillis += mTimerInterval.getMillis();
+                if (mCountDownMillis > 3600000)
+                    mCountDownMillis = 0;
+            }
         }
+
+        updateTimer(mCountDownMillis / 1000);
     }
 
     public void onProgramLongClick(View view) {
