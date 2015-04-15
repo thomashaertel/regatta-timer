@@ -139,7 +139,7 @@ public class MainActivity extends Activity {
 
             public void onFinish() {
                 updateTimer(0);
-                mTimer = createStopWatch(-1).start();
+                //mTimer = createStopWatch(-1).start();
             }
         };
     }

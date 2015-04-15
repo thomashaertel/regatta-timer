@@ -95,13 +95,19 @@ public abstract class RegattaCountDownTimer implements Timer<RegattaCountDownTim
      * Resume the countdown after it was cancelled.
      */
     public synchronized final RegattaCountDownTimer resume() {
-        mCancelled = false;
         if (mMillisLeft <= 0) {
             onFinish();
             return this;
         }
+
         mStopTimeInFuture = SystemClock.elapsedRealtime() + mMillisLeft;
-        mHandler.sendMessage(mHandler.obtainMessage(MSG));
+
+        if(mCancelled) {
+            mHandler.sendMessage(mHandler.obtainMessage(MSG));
+        }
+
+        mCancelled = false;
+
         return this;
     }
 
@@ -109,17 +115,9 @@ public abstract class RegattaCountDownTimer implements Timer<RegattaCountDownTim
      * Reduces the countdown with SyncIntervallMillis .
      */
     public synchronized final RegattaCountDownTimer sync() {
-        mCancelled = false;
-
         mMillisLeft -= mSyncIntervallMillis;
 
-        if (mMillisLeft <= 0) {
-            onFinish();
-            return this;
-        }
-        mStopTimeInFuture = SystemClock.elapsedRealtime() + mMillisLeft;
-        mHandler.sendMessage(mHandler.obtainMessage(MSG));
-        return this;
+        return resume();
     }
 
     public void setSyncIntervallMillis(long millis) {
