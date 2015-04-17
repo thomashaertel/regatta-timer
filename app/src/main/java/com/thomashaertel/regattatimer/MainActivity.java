@@ -142,9 +142,9 @@ public class MainActivity extends Activity {
                 if (mCountDownMillis > 3600000)
                     mCountDownMillis = 0;
             }
-        }
 
-        updateTimer(mCountDownMillis / 1000);
+            updateTimer(mCountDownMillis / 1000);
+        }
     }
 
     public void onProgramLongClick(View view) {
@@ -175,7 +175,7 @@ public class MainActivity extends Activity {
 
             public void onFinish() {
                 updateTimer(0);
-                //mTimer = createStopWatch(-1).start();
+                mTimer = createStopWatch(-1).start();
 
                 updateTimerSettings();
             }
