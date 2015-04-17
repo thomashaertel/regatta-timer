@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.wearable.view.WatchViewStub;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class MainActivity extends Activity {
@@ -22,8 +23,12 @@ public class MainActivity extends Activity {
     private Button mClearButton;
 
     private TextView mTimerIntervalView;
-    private TextView mTimerModeView;
     private TextView mTimerView;
+
+    private ImageView mArrowUp;
+    private ImageView mArrowDown;
+    private ImageView mPlus;
+    private ImageView mRepeat;
 
     private ToneGenerator mToneGenerator;
 
@@ -46,9 +51,10 @@ public class MainActivity extends Activity {
             @Override
             public void onLayoutInflated(WatchViewStub stub) {
                 mTimerIntervalView = (TextView) stub.findViewById(R.id.timerInterval);
-                mTimerIntervalView.setText(mTimerInterval.getTextRes());
-                mTimerModeView = (TextView) stub.findViewById(R.id.timerMode);
-                mTimerModeView.setText(mTimerMode.getTextRes());
+                mRepeat = (ImageView) stub.findViewById(R.id.timerModeRepeat);
+                mArrowDown = (ImageView) stub.findViewById(R.id.timerModeDown);
+                mPlus = (ImageView) stub.findViewById(R.id.timerModePlus);
+                mArrowUp = (ImageView) stub.findViewById(R.id.timerModeUp);
                 mTimerView = (TextView) stub.findViewById(R.id.timer);
 
                 mProgramButton = (Button) stub.findViewById(R.id.programButton);
@@ -64,8 +70,11 @@ public class MainActivity extends Activity {
                     public boolean onLongClick(View v) {
                         onClearLongClick(v);
                         return true;
+
                     }
                 });
+
+                updateTimerSettings();
             }
         });
     }
@@ -99,6 +108,8 @@ public class MainActivity extends Activity {
                 mTimer.resume();
             }
         }
+
+        updateTimerSettings();
     }
 
     public void onSyncClick(View view) {
@@ -116,11 +127,12 @@ public class MainActivity extends Activity {
 
         mCountDownMillis = 0;
         updateTimer(mCountDownMillis);
+        updateTimerSettings();
     }
 
     public void onClearLongClick(View view) {
         mTimerMode = rotate(mTimerMode, 1);
-        mTimerModeView.setText(mTimerMode.getTextRes());
+        updateTimerSettings();
     }
 
     public void onProgramClick(View view) {
@@ -137,7 +149,7 @@ public class MainActivity extends Activity {
 
     public void onProgramLongClick(View view) {
         mTimerInterval = rotate(mTimerInterval, 1);
-        mTimerIntervalView.setText(mTimerInterval.getTextRes());
+        updateTimerSettings();
     }
 
     private RegattaCountDownTimer createCountDownTimer(long totalMillis) {
@@ -164,6 +176,8 @@ public class MainActivity extends Activity {
             public void onFinish() {
                 updateTimer(0);
                 //mTimer = createStopWatch(-1).start();
+
+                updateTimerSettings();
             }
         };
     }
@@ -183,6 +197,23 @@ public class MainActivity extends Activity {
 
     private void updateTimer(long seconds) {
         mTimerView.setText(String.format("%02d:%02d", seconds / 60, seconds % 60));
+    }
+
+    private void updateTimerSettings() {
+        mTimerIntervalView.setText(mTimerInterval.getTextRes());
+
+        if(mTimer != null && !mTimer.isCancelled()) {
+            updateTimerMode(mTimerMode, mTimer instanceof StopWatch, mTimer instanceof RegattaCountDownTimer);
+        } else {
+            updateTimerMode(mTimerMode, true, true);
+        }
+    }
+
+    private void updateTimerMode(TimerMode mode, boolean showUp, boolean showDown) {
+        mRepeat.setVisibility(mode == TimerMode.REPEATING ? View.VISIBLE : View.INVISIBLE);
+        mArrowUp.setVisibility(mode == TimerMode.UPDOWN && showUp ? View.VISIBLE : View.INVISIBLE);
+        mArrowDown.setVisibility(mode == TimerMode.UPDOWN && showDown ? View.VISIBLE : View.INVISIBLE);
+        mPlus.setVisibility(mode == TimerMode.UPDOWN && showUp && showDown ? View.VISIBLE : View.INVISIBLE);
     }
 
     private static <T extends Enum<T>> T rotate(T current, int increment) {

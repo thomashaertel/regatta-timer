@@ -33,7 +33,7 @@ public abstract class RegattaCountDownTimer implements Timer<RegattaCountDownTim
 
     private long mMillisLeft;
 
-    private long mSyncIntervallMillis = 60000;
+    private long mSyncIntervalMillis = 60000;
 
     /**
      * Millis since epoch when alarm should stop.
@@ -112,20 +112,25 @@ public abstract class RegattaCountDownTimer implements Timer<RegattaCountDownTim
     }
 
     /**
-     * Reduces the countdown with SyncIntervallMillis .
+     * Reduces the countdown with SyncIntervalMillis .
      */
     public synchronized final RegattaCountDownTimer sync() {
-        mMillisLeft -= mSyncIntervallMillis; // TODO: immer auf nächste ganze Minute reduzieren
+        cancel();
+
+        final long syncIntervals = mMillisLeft / mSyncIntervalMillis;
+        mMillisLeft = syncIntervals * mSyncIntervalMillis + 100; // add 100ms latency for displaying synced time tick
+
+        onTick(mMillisLeft);
 
         return resume();
     }
 
-    public void setSyncIntervallMillis(long millis) {
-        mSyncIntervallMillis = millis;
+    public void setSyncIntervalMillis(long millis) {
+        mSyncIntervalMillis = millis;
     }
 
-    public long getSyncIntervallMillis() {
-        return mSyncIntervallMillis;
+    public long getSyncIntervalMillis() {
+        return mSyncIntervalMillis;
     }
 
     public long getMillisLeft() {
