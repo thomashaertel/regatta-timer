@@ -7,14 +7,14 @@ The Regatta Timer acts like an Optimum Time Series 3 watch which is used by sail
 ## Usage
 
 Actions:
-Prog: Adds the configured amount of time to the count down.
-Clear: Resets the the count down and stop watch.
-Start/Stop: If a count down time is set it starts/stops the couting down. Otherwise a stop watch (count up) ist started/stopped.
-Sync: Synchronizes the timer in count down mode to the next whole minute.
+|Prog|Adds the configured amount of time to the count down.|
+|Clear|Resets the the count down and stop watch.|
+|Start/Stop|If a count down time is set it starts/stops the couting down. Otherwise a stop watch (count up) ist started/stopped.|
+|Sync|Synchronizes the timer in count down mode to the next whole minute.|
 
 Changing Settings(long touch):
-Prog: Changing amount of time to be added. Available modes: 5,4,1,0 / 3M / 2M / 1M
-Clear: Changing interval mode between repeating and up/down
+|Prog|Changing amount of time to be added. Available modes: 5,4,1,0 / 3M / 2M / 1M|
+|Clear|Changing interval mode between repeating and up/down.|
 
 ## Contributing
 For making contributions please send me pull requests, but also bugs and enhancement requests are welcome. Although no guarantees on when I can review them.
