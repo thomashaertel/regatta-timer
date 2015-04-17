@@ -16,6 +16,15 @@ Sync: Synchronizes the timer in count down mode to the next whole minute.
 Prog: Changing amount of time to be added. Available modes: 5,4,1,0 / 3M / 2M / 1M<br>
 Clear: Changing interval mode between repeating and up/down.
 
+#### Acustic Signals:
+In count down mode the timer gives different beep signals indicating how much time is available to zero.
+
+Every minute: Beep<br>
+In last minute: <br>
+- every 10 sec: Beep<br>
+- last 15 secs: two short beeps every second<br>
+- zero time: long beep
+
 ## Contributing
 For making contributions please send me pull requests, but also bugs and enhancement requests are welcome. Although no guarantees on when I can review them.
 
