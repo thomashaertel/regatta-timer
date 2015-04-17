@@ -32,8 +32,8 @@
         android:layout_alignStart="@id/timer" />
 
     <LinearLayout android:orientation="horizontal"
-        android:layout_marginTop="2.5dp"
-        android:layout_marginBottom="2.5dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="0dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_toRightOf="@id/timerInterval"
@@ -50,7 +50,7 @@
             android:layout_height="match_parent"
             android:adjustViewBounds="true"
             android:layout_gravity="right"
-            android:scaleType="fitCenter"
+            android:scaleType="fitEnd"
             android:layout_weight="0.125"
             />
         <ImageView android:id="@+id/timerModeDown" android:layout_width="wrap_content"
@@ -58,15 +58,15 @@
             android:layout_height="match_parent"
             android:adjustViewBounds="true"
             android:layout_gravity="right"
-            android:scaleType="fitCenter"
+            android:scaleType="fitEnd"
             android:layout_weight="0.125"
-             />
+            />
         <ImageView android:id="@+id/timerModePlus" android:layout_width="wrap_content"
             android:src="@drawable/ic_plus"
             android:layout_height="match_parent"
             android:adjustViewBounds="true"
             android:layout_gravity="right"
-            android:scaleType="fitCenter"
+            android:scaleType="fitEnd"
             android:layout_weight="0.125"
             />
         <ImageView android:id="@+id/timerModeUp" android:layout_width="wrap_content"
@@ -74,7 +74,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="right"
             android:adjustViewBounds="true"
-            android:scaleType="fitCenter"
+            android:scaleType="fitEnd"
             android:layout_weight="0.125"
             />
     </LinearLayout>
