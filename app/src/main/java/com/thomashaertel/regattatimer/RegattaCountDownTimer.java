@@ -115,7 +115,7 @@ public abstract class RegattaCountDownTimer implements Timer<RegattaCountDownTim
      * Reduces the countdown with SyncIntervallMillis .
      */
     public synchronized final RegattaCountDownTimer sync() {
-        mMillisLeft -= mSyncIntervallMillis;
+        mMillisLeft -= mSyncIntervallMillis; // TODO: immer auf nächste ganze Minute reduzieren
 
         return resume();
     }

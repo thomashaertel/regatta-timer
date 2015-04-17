@@ -1,6 +1,8 @@
 package com.thomashaertel.regattatimer;
 
 import android.app.Activity;
+import android.media.AudioManager;
+import android.media.ToneGenerator;
 import android.os.Bundle;
 import android.support.wearable.view.WatchViewStub;
 import android.view.View;
@@ -23,6 +25,7 @@ public class MainActivity extends Activity {
     private TextView mTimerModeView;
     private TextView mTimerView;
 
+    private ToneGenerator mToneGenerator;
 
     private long mCountDownMillis = 0;
 
@@ -31,6 +34,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mToneGenerator = new ToneGenerator(AudioManager.STREAM_SYSTEM, ToneGenerator.MAX_VOLUME);
 
         if(savedInstanceState != null) {
             mTimerInterval = TimerInterval.valueOf(savedInstanceState.getString(TIMER_INTERVAL, TimerInterval.M5310.name()));
@@ -64,6 +68,13 @@ public class MainActivity extends Activity {
                 });
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        mToneGenerator.release();
     }
 
     @Override
@@ -134,6 +145,19 @@ public class MainActivity extends Activity {
 
             public void onTick(long millisUntilFinished) {
                 long secondsUntilFinished = millisUntilFinished / 1000;
+
+                if(secondsUntilFinished % 60 == 0) {
+                    mToneGenerator.startTone(ToneGenerator.TONE_PROP_BEEP);
+                } else if(secondsUntilFinished < 60) {
+                    if(secondsUntilFinished % 10 == 0) {
+                        mToneGenerator.startTone(ToneGenerator.TONE_PROP_BEEP);
+                    } else if (secondsUntilFinished <= 15) {
+                        mToneGenerator.startTone(ToneGenerator.TONE_PROP_BEEP);
+                    } else if(secondsUntilFinished < 10) {
+                        mToneGenerator.startTone(ToneGenerator.TONE_PROP_BEEP2);
+                    }
+                }
+
                 updateTimer(secondsUntilFinished);
             }
 
