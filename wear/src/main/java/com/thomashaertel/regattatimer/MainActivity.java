@@ -20,6 +20,8 @@ import android.app.Activity;
 import android.media.AudioManager;
 import android.media.ToneGenerator;
 import android.os.Bundle;
+import android.os.Vibrator;
+import android.support.annotation.NonNull;
 import android.support.wearable.view.WatchViewStub;
 import android.view.View;
 import android.widget.Button;
@@ -47,8 +49,13 @@ public class MainActivity extends Activity {
     private ImageView mRepeat;
 
     private ToneGenerator mToneGenerator;
+    private Vibrator mVibrator;
 
     private long mCountDownMillis = 0;
+
+    private final long[] mVibrationPattern = {0, 500, 50, 300};
+    //-1 - don't repeat
+    private final int mIndexInPatternToRepeat = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +63,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         mToneGenerator = new ToneGenerator(AudioManager.STREAM_SYSTEM, ToneGenerator.MAX_VOLUME);
+        mVibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
 
         if(savedInstanceState != null) {
             mTimerInterval = TimerInterval.valueOf(savedInstanceState.getString(TIMER_INTERVAL, TimerInterval.M5310.name()));
@@ -103,7 +111,7 @@ public class MainActivity extends Activity {
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
+    public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString(TIMER_INTERVAL, mTimerInterval.name());
         outState.putString(TIMER_MODE, mTimerMode.name());
@@ -175,14 +183,18 @@ public class MainActivity extends Activity {
                 long secondsUntilFinished = millisUntilFinished / 1000;
 
                 if(secondsUntilFinished % 60 == 0) {
-                    mToneGenerator.startTone(ToneGenerator.TONE_PROP_BEEP, 100);
+                    mToneGenerator.startTone(ToneGenerator.TONE_PROP_BEEP);
+                    mVibrator.vibrate(mVibrationPattern, mIndexInPatternToRepeat);
                 } else if(secondsUntilFinished < 60) {
                     if(secondsUntilFinished % 10 == 0) {
-                        mToneGenerator.startTone(ToneGenerator.TONE_PROP_BEEP, 100);
+                        mToneGenerator.startTone(ToneGenerator.TONE_PROP_BEEP);
+                        mVibrator.vibrate(mVibrationPattern, mIndexInPatternToRepeat);
                     } else if (secondsUntilFinished <= 15) {
-                        mToneGenerator.startTone(ToneGenerator.TONE_PROP_BEEP, 100);
+                        mToneGenerator.startTone(ToneGenerator.TONE_PROP_BEEP);
+                        mVibrator.vibrate(mVibrationPattern, mIndexInPatternToRepeat);
                     } else if(secondsUntilFinished < 10) {
-                        mToneGenerator.startTone(ToneGenerator.TONE_PROP_BEEP2, 100);
+                        mToneGenerator.startTone(ToneGenerator.TONE_PROP_BEEP2);
+                        mVibrator.vibrate(mVibrationPattern, mIndexInPatternToRepeat);
                     }
                 }
 
@@ -192,6 +204,9 @@ public class MainActivity extends Activity {
             public void onFinish() {
                 updateTimer(0);
                 mTimer = createStopWatch(-1).start();
+
+                mToneGenerator.startTone(ToneGenerator.TONE_PROP_BEEP);
+                mVibrator.vibrate(mVibrationPattern, mIndexInPatternToRepeat);
 
                 updateTimerSettings();
             }
