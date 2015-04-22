@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Regatta Timer</string>
+    <string name="startStop">Start/Stop</string>
+    <string name="sync">Sync</string>
+    <string name="clear">C\nL\nE\nA\nR</string>
+    <string name="program">P\nR\nO\nG</string>
+    <string name="timer">00:00</string>
+    <string name="mode_5410">5,4,1,0</string>
+    <string name="mode_5M">5M</string>
+    <string name="mode_3M">3M</string>
+    <string name="mode_1M">1M</string>
+    <string name="mode_updown">Up/Down</string>
+    <string name="mode_repeat">Repeat</string>
+</resources>

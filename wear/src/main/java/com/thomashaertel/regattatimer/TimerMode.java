@@ -1,3 +1,4 @@
+
 /*
  * Copyright (c) 2015. Thomas Haertel
  *
@@ -14,17 +15,19 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
 package com.thomashaertel.regattatimer;
 
-import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
+public enum TimerMode {
+    UPDOWN(R.string.mode_updown), REPEATING(R.string.mode_repeat);
 
-public class MainActivity extends ActionBarActivity {
+    private final int textRes;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    private TimerMode(int textRes) {
+        this.textRes = textRes;
     }
 
+    public int getTextRes() {
+        return textRes;
+    }
 }

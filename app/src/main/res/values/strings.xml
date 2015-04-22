@@ -1,18 +1,20 @@
 <resources>
     <string name="app_name">Regatta Timer</string>
-    <string name="hello_round">Hello Round World!</string>
-    <string name="hello_square">Hello Square World!</string>
-    <string name="startStop">Start/Stop</string>
-    <string name="start">Start</string>
-    <string name="stop">Stop</string>
-    <string name="sync">Sync</string>
-    <string name="clear">C\nL\nE\nA\nR</string>
-    <string name="program">P\nR\nO\nG</string>
-    <string name="timer">00:00</string>
-    <string name="mode_5410">5,4,1,0</string>
-    <string name="mode_5M">5M</string>
-    <string name="mode_3M">3M</string>
-    <string name="mode_1M">1M</string>
-    <string name="mode_updown">Up/Down</string>
-    <string name="mode_repeat">Repeat</string>
+
+    <string name="app_info">The Regatta Timer App for Smartwatches acts like an Optimum Time Series 3 watch which is used on sailing regattas. It has all the timer and stop watch functionality implemented as the regular watch.</string>
+
+    <string name="actions">Actions:</string>
+    <string name="startstop_button">Start/Stop</string>
+    <string name="startstop_info">If a count down time is set it starts/stops the couting down. Otherwise a stop watch (count up) ist started/stopped.</string>
+    <string name="sync_button">Sync</string>
+    <string name="sync_info">Synchronizes the timer in count down mode to the next whole minute.</string>
+    <string name="clear_button">CLEAR</string>
+    <string name="clear_info">Resets the the count down and stop watch.</string>
+    <string name="program_button">PROG</string>
+    <string name="program_info">Adds the configured amount of time to the count down.</string>
+    <string name="mode_change">Mode Changes (long touch):</string>
+    <string name="mode_clear_button">CLEAR</string>
+    <string name="mode_clear_info">Changing interval mode between repeating and up/down.</string>
+    <string name="mode_program_button">PROG</string>
+    <string name="mode_program_info">Changing amount of time to be added. Available modes: 5,4,1,0 / 3M / 2M / 1M</string>
 </resources>

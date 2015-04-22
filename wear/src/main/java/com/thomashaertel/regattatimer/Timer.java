@@ -16,15 +16,15 @@
  */
 package com.thomashaertel.regattatimer;
 
-import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
+public interface Timer<T> {
+    T start();
+    T resume();
 
-public class MainActivity extends ActionBarActivity {
+    boolean isCancelled();
+    void cancel();
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-    }
+    long getMillisLeft();
 
-}
+
+    void onTick(long millisUntilFinished);
+    void onFinish();}
