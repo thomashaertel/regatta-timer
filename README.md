@@ -2,7 +2,10 @@
 This App is a Regatta Timer for Android Smartwatches.
 
 ## Overview
-The Regatta Timer acts like an Optimum Time Series 3 watch which is used by sailing regattas. It has all the timer ans stop watch funcationality implemented as the regular watch.
+The Regatta Timer acts like an Optimum Time Series 3 watch which is used on sailing regattas. It has all the timer ans stop watch functionality implemented as the regular watch.
+
+<img src="https://cloud.githubusercontent.com/assets/1078036/7267710/614d33bc-e8bf-11e4-8864-08a16917460c.png" alt="Android Wear Round" width="50%" height="50%">
+<img src="https://cloud.githubusercontent.com/assets/1078036/7267656/dcb23aee-e8be-11e4-8ad6-0eb5568039d3.png" alt="Android Wear Rect" width="50%" height="50%">
 
 ## Usage
 
