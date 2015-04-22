@@ -1,4 +1,6 @@
 # Regatta Timer
+[![Build Status](https://travis-ci.org/thomashaertel/regatta-timer.svg?branch=master)](https://travis-ci.org/thomashaertel/regatta-timer)
+
 This App is a Regatta Timer for Android Smartwatches.
 
 ## Overview
