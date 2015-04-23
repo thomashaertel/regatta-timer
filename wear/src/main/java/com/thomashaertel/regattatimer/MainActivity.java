@@ -181,9 +181,13 @@ public class MainActivity extends Activity {
         return new RegattaCountDownTimer(totalMillis, 1000) {
 
             public void onTick(long millisUntilFinished) {
-                long secondsUntilFinished = millisUntilFinished / 1000;
+                final long secondsUntilFinished = millisUntilFinished / 1000;
+                final long secondsUntilNextMinute = secondsUntilFinished % 60;
 
-                if(secondsUntilFinished % 60 == 0) {
+                if(secondsUntilNextMinute < 6 && secondsUntilNextMinute > 0) {
+                    mToneGenerator.startTone(ToneGenerator.TONE_PROP_BEEP);
+                    mVibrator.vibrate(mVibrationPattern, mIndexInPatternToRepeat);
+                } else if(secondsUntilNextMinute == 0) {
                     mToneGenerator.startTone(ToneGenerator.TONE_PROP_BEEP);
                     mVibrator.vibrate(mVibrationPattern, mIndexInPatternToRepeat);
                 } else if(secondsUntilFinished < 60) {
