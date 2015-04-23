@@ -144,14 +144,15 @@ public class MainActivity extends Activity {
     }
 
     public void onClearClick(View view) {
-        if(mTimer != null) {
-            mTimer.cancel();
+        if(mTimer != null && mTimer.isCancelled()) {
             mTimer = null;
         }
 
-        mCountDownMillis = 0;
-        updateTimer(mCountDownMillis);
-        updateTimerSettings();
+        if(mTimer == null) {
+            mCountDownMillis = 0;
+            updateTimer(mCountDownMillis);
+            updateTimerSettings();
+        }
     }
 
     public void onClearLongClick(View view) {
@@ -203,7 +204,11 @@ public class MainActivity extends Activity {
 
             public void onFinish() {
                 updateTimer(0);
-                mTimer = createStopWatch(-1).start();
+                if(mTimerMode == TimerMode.REPEATING) {
+                    mTimer.start();
+                } else {
+                    mTimer = createStopWatch(-1).start();
+                }
 
                 mToneGenerator.startTone(ToneGenerator.TONE_PROP_BEEP);
                 mVibrator.vibrate(mVibrationPattern, mIndexInPatternToRepeat);
