@@ -24,6 +24,7 @@ import android.os.Vibrator;
 import android.support.annotation.NonNull;
 import android.support.wearable.view.WatchViewStub;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -125,6 +126,7 @@ public class MainActivity extends Activity {
                 mTimer = createStopWatch(-1);
             }
             mTimer.start();
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         } else {
             if (!mTimer.isCancelled()) {
                 mTimer.cancel();
@@ -150,8 +152,11 @@ public class MainActivity extends Activity {
 
         if(mTimer == null) {
             mCountDownMillis = 0;
+
             updateTimer(mCountDownMillis);
             updateTimerSettings();
+
+            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         }
     }
 
@@ -169,6 +174,8 @@ public class MainActivity extends Activity {
             }
 
             updateTimer(mCountDownMillis / 1000);
+
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         }
     }
 
