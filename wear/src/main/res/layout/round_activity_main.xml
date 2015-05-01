@@ -78,38 +78,31 @@
             />
     </LinearLayout>
 
-    <!--TextView android:id="@+id/timerMode" android:layout_width="wrap_content"
-        android:paddingTop="10dp"
-        android:text="@string/mode_repeat"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/startStopButton"
-        android:layout_alignEnd="@+id/timer" /-->
-
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:textSize="15dp"
         android:text="@string/program"
         android:id="@+id/programButton"
-        android:layout_toStartOf="@+id/timer"
-        android:layout_above="@+id/syncButton"
-        android:layout_below="@+id/startStopButton"
+        android:layout_below="@id/timer"
+        android:layout_marginLeft="40dp"
+        android:layout_alignParentStart="true"
         android:onClick="onProgramClick"
         android:longClickable="true"
-        android:background="@drawable/wear_round_button_rounded"/>
+        android:background="@drawable/wear_round_button_round"/>
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginRight="40dp"
         android:textSize="15dp"
         android:text="@string/clear"
         android:id="@+id/clearButton"
-        android:layout_toEndOf="@+id/timer"
-        android:layout_above="@+id/syncButton"
-        android:layout_below="@+id/startStopButton"
+        android:layout_below="@id/timer"
+        android:layout_alignParentEnd="true"
         android:onClick="onClearClick"
         android:longClickable="true"
-        android:background="@drawable/wear_round_button_rounded"/>
+        android:background="@drawable/wear_round_button_round"/>
 
     <Button
         android:layout_width="wrap_content"
@@ -120,6 +113,6 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
         android:onClick="onSyncClick"
-        android:background="@drawable/wear_round_button_oval"/>
+        android:background="@drawable/wear_round_button_oval" android:visibility="invisible" />
 
 </RelativeLayout>

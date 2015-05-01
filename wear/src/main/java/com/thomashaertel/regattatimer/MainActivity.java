@@ -40,6 +40,7 @@ public class MainActivity extends Activity {
 
     private Button mProgramButton;
     private Button mClearButton;
+    private Button mSyncButton;
 
     private TextView mTimerIntervalView;
     private TextView mTimerView;
@@ -82,6 +83,8 @@ public class MainActivity extends Activity {
                 mArrowUp = (ImageView) stub.findViewById(R.id.timerModeUp);
                 mTimerView = (TextView) stub.findViewById(R.id.timer);
 
+                mSyncButton = (Button) stub.findViewById(R.id.syncButton);
+
                 mProgramButton = (Button) stub.findViewById(R.id.programButton);
                 mProgramButton.setOnLongClickListener(new View.OnLongClickListener() {
                     public boolean onLongClick(View v) {
@@ -99,6 +102,7 @@ public class MainActivity extends Activity {
                     }
                 });
 
+                updateButtonState(false);
                 updateTimerSettings();
             }
         });
@@ -135,6 +139,7 @@ public class MainActivity extends Activity {
             }
         }
 
+        updateButtonState(!mTimer.isCancelled());
         updateTimerSettings();
     }
 
@@ -261,6 +266,12 @@ public class MainActivity extends Activity {
         mArrowUp.setVisibility(mode == TimerMode.UPDOWN && showUp ? View.VISIBLE : View.INVISIBLE);
         mArrowDown.setVisibility(mode == TimerMode.UPDOWN && showDown ? View.VISIBLE : View.INVISIBLE);
         mPlus.setVisibility(mode == TimerMode.UPDOWN && showUp && showDown ? View.VISIBLE : View.INVISIBLE);
+    }
+
+    private void updateButtonState(boolean timerRunning) {
+        mSyncButton.setVisibility(timerRunning ? View.VISIBLE : View.INVISIBLE);
+        mProgramButton.setVisibility(timerRunning ? View.INVISIBLE : View.VISIBLE);
+        mClearButton.setVisibility(timerRunning ? View.INVISIBLE : View.VISIBLE);
     }
 
     private static <T extends Enum<T>> T rotate(T current, int increment) {

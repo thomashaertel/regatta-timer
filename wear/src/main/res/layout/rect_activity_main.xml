@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity" tools:deviceIds="wear_square">
+    tools:context=".MainActivity"
+    tools:deviceIds="wear_square">
 
     <Button
         android:layout_width="wrap_content"
@@ -14,9 +16,11 @@
         android:layout_alignParentStart="true"
         android:layout_marginBottom="5dp"
         android:onClick="onStartStopClick"
-        android:background="@drawable/wear_rect_button_rounded"/>
+        android:background="@drawable/wear_rect_button_rounded" />
 
-    <TextView android:id="@+id/timer" android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/timer"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/timer"
         android:textSize="50dp"
@@ -25,13 +29,16 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
-    <TextView android:id="@+id/timerInterval" android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/timerInterval"
+        android:layout_width="wrap_content"
         android:text="@string/mode_5410"
         android:layout_height="wrap_content"
         android:layout_below="@id/startStopButton"
         android:layout_alignStart="@id/timer" />
 
-    <LinearLayout android:orientation="horizontal"
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_marginTop="0dp"
         android:layout_marginBottom="0dp"
         android:layout_width="match_parent"
@@ -41,42 +48,51 @@
         android:layout_below="@id/startStopButton"
         android:layout_alignTop="@id/timerInterval"
         android:layout_alignBottom="@id/timerInterval">
+
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent" android:layout_weight="0.5" />
+            android:layout_height="match_parent"
+            android:layout_weight="0.5" />
 
-        <ImageView android:id="@+id/timerModeRepeat" android:layout_width="wrap_content"
+        <ImageView
+            android:id="@+id/timerModeRepeat"
+            android:layout_width="wrap_content"
             android:src="@drawable/ic_repeat"
             android:layout_height="match_parent"
             android:adjustViewBounds="true"
             android:layout_gravity="right"
             android:scaleType="fitEnd"
-            android:layout_weight="0.125"
-            />
-        <ImageView android:id="@+id/timerModeDown" android:layout_width="wrap_content"
+            android:layout_weight="0.125" />
+
+        <ImageView
+            android:id="@+id/timerModeDown"
+            android:layout_width="wrap_content"
             android:src="@drawable/ic_arrow_down"
             android:layout_height="match_parent"
             android:adjustViewBounds="true"
             android:layout_gravity="right"
             android:scaleType="fitEnd"
-            android:layout_weight="0.125"
-            />
-        <ImageView android:id="@+id/timerModePlus" android:layout_width="wrap_content"
+            android:layout_weight="0.125" />
+
+        <ImageView
+            android:id="@+id/timerModePlus"
+            android:layout_width="wrap_content"
             android:src="@drawable/ic_plus"
             android:layout_height="match_parent"
             android:adjustViewBounds="true"
             android:layout_gravity="right"
             android:scaleType="fitEnd"
-            android:layout_weight="0.125"
-            />
-        <ImageView android:id="@+id/timerModeUp" android:layout_width="wrap_content"
+            android:layout_weight="0.125" />
+
+        <ImageView
+            android:id="@+id/timerModeUp"
+            android:layout_width="wrap_content"
             android:src="@drawable/ic_arrow_up"
             android:layout_height="match_parent"
             android:layout_gravity="right"
             android:adjustViewBounds="true"
             android:scaleType="fitEnd"
-            android:layout_weight="0.125"
-            />
+            android:layout_weight="0.125" />
     </LinearLayout>
     <!--TextView android:id="@+id/timerMode" android:layout_width="wrap_content"
         android:paddingTop="0dp"
@@ -85,31 +101,37 @@
         android:layout_below="@id/startStopButton"
         android:layout_alignEnd="@+id/timer" /-->
 
-    <Button
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:gravity="center_horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="15dp"
-        android:text="@string/program"
-        android:id="@+id/programButton"
-        android:layout_toStartOf="@+id/timer"
-        android:layout_above="@+id/syncButton"
-        android:layout_below="@+id/startStopButton"
-        android:onClick="onProgramClick"
-        android:longClickable="true"
-        android:background="@drawable/wear_rect_button_rounded"/>
+        android:orientation="horizontal">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="10dp"
-        android:text="@string/clear"
-        android:id="@+id/clearButton"
-        android:layout_toEndOf="@+id/timer"
-        android:layout_above="@+id/syncButton"
-        android:layout_below="@+id/startStopButton"
-        android:onClick="onClearClick"
-        android:longClickable="true"
-        android:background="@drawable/wear_rect_button_rounded"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:text="@string/program"
+            android:id="@+id/programButton"
+            android:layout_weight="1"
+            android:layout_marginRight="5dp"
+            android:onClick="onProgramClick"
+            android:longClickable="true"
+            android:background="@drawable/wear_rect_button_rounded" />
+
+        <Button
+            android:layout_marginLeft="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:layout_weight="1"
+            android:text="@string/clear"
+            android:id="@+id/clearButton"
+            android:onClick="onClearClick"
+            android:longClickable="true"
+            android:background="@drawable/wear_rect_button_rounded" />
+    </LinearLayout>
 
     <Button
         android:layout_width="wrap_content"
@@ -121,6 +143,7 @@
         android:layout_alignParentStart="true"
         android:layout_marginTop="5dp"
         android:onClick="onSyncClick"
-        android:background="@drawable/wear_rect_button_rounded"/>
+        android:background="@drawable/wear_rect_button_rounded"
+        android:visibility="invisible" />
 
 </RelativeLayout>
