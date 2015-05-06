@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Regatta Timer</string>
     <string name="startStop">Start/Stop</string>
     <string name="sync">Sync</string>
@@ -11,4 +11,29 @@
     <string name="mode_1M">1M</string>
     <string name="mode_updown">Up/Down</string>
     <string name="mode_repeat">Repeat</string>
+
+    <string name="title_interval_mode">Interval mode</string>
+    <string name="title_timer_mode">Timer mode</string>
+
+    <string-array name="values_interval_modes" tools:translatable="false">
+        <item>5,4,1,0</item>
+        <item>3M</item>
+        <item>2M</item>
+        <item>1M</item>
+    </string-array>
+    <string-array name="entries_interval_modes" tools:translatable="false">
+        <item>M5410</item>
+        <item>M3</item>
+        <item>M2</item>
+        <item>M1</item>
+    </string-array>
+
+    <string-array name="values_timer_modes" tools:translatable="false">
+        <item>Repeating</item>
+        <item>Up/Down</item>
+    </string-array>
+    <string-array name="entries_timer_modes" tools:translatable="false">
+        <item>REPEATING</item>
+        <item>UPDOWN</item>
+    </string-array>
 </resources>

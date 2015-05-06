@@ -17,6 +17,7 @@
 package com.thomashaertel.regattatimer;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.media.AudioManager;
 import android.media.ToneGenerator;
 import android.os.Bundle;
@@ -33,7 +34,7 @@ public class MainActivity extends Activity {
     private static final String TIMER_INTERVAL = "tmrint";
     private static final String TIMER_MODE = "tmrmode";
 
-    private TimerInterval mTimerInterval = TimerInterval.M5310;
+    private TimerInterval mTimerInterval = TimerInterval.M5410;
     private TimerMode mTimerMode = TimerMode.UPDOWN;
 
     private Timer<?> mTimer;
@@ -68,7 +69,7 @@ public class MainActivity extends Activity {
         mVibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
 
         if(savedInstanceState != null) {
-            mTimerInterval = TimerInterval.valueOf(savedInstanceState.getString(TIMER_INTERVAL, TimerInterval.M5310.name()));
+            mTimerInterval = TimerInterval.valueOf(savedInstanceState.getString(TIMER_INTERVAL, TimerInterval.M5410.name()));
             mTimerMode = TimerMode.valueOf(savedInstanceState.getString(TIMER_MODE, TimerMode.UPDOWN.name()));
         }
 
@@ -172,7 +173,7 @@ public class MainActivity extends Activity {
 
     public void onProgramClick(View view) {
         if(mTimer == null) {
-            if(mCountDownMillis < TimerInterval.M5310.getMillis() || !(mTimerMode == TimerMode.REPEATING && mTimerInterval == TimerInterval.M5310)) {
+            if(mCountDownMillis < TimerInterval.M5410.getMillis() || !(mTimerMode == TimerMode.REPEATING && mTimerInterval == TimerInterval.M5410)) {
                 mCountDownMillis += mTimerInterval.getMillis();
                 if (mCountDownMillis > 3600000)
                     mCountDownMillis = 0;
@@ -187,6 +188,11 @@ public class MainActivity extends Activity {
     public void onProgramLongClick(View view) {
         mTimerInterval = rotate(mTimerInterval, 1);
         updateTimerSettings();
+    }
+
+    public void onTimerClick(View view) {
+        Intent intent = new Intent(this, SettingsActivity.class);
+        startActivity(intent);
     }
 
     private RegattaCountDownTimer createCountDownTimer(long totalMillis) {
