@@ -12,9 +12,6 @@
     <string name="clear_info">Resets the the count down and stop watch.</string>
     <string name="program_button">PROG</string>
     <string name="program_info">Adds the configured amount of time to the count down.</string>
-    <string name="mode_change">Mode Changes (long touch):</string>
-    <string name="mode_clear_button">CLEAR</string>
-    <string name="mode_clear_info">Changing interval mode between repeating and up/down.</string>
-    <string name="mode_program_button">PROG</string>
-    <string name="mode_program_info">Changing amount of time to be added. Available modes: 5,4,1,0 / 3M / 2M / 1M</string>
+    <string name="settings">Settings:</string>
+    <string name="settings_info">For opening the preferences tap on displayed time while the timer is stopped. In the preferences screen the timer intervals and timer mode can be changed. Available intervals are: 5,4,1,0 / 3M / 2M / 1M.\nThe timer mode can be switched between repeating and up/down.</string>
 </resources>

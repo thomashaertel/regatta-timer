@@ -109,7 +109,7 @@
                     android:text="@string/sync_info" />
             </TableRow>
 
-            <TableRow android:layout_marginTop="10dp">
+            <TableRow android:layout_marginTop="10dp" android:layout_marginBottom="5dp">
 
                 <TextView
                     android:id="@+id/modes"
@@ -117,40 +117,15 @@
                     android:layout_width="wrap_content"
                     android:layout_below="@id/actions_table"
                     android:layout_height="wrap_content"
-                    android:text="@string/mode_change"
+                    android:text="@string/settings"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
             </TableRow>
 
             <TableRow>
-
-                <Button
-                    android:layout_gravity="center_vertical"
+                <TextView android:layout_span="2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/program_button"
-                    android:clickable="false"
-                    android:layout_marginRight="10dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/mode_program_info" />
-            </TableRow>
-
-            <TableRow android:layout_marginTop="10dp">
-
-                <Button
-                    android:layout_gravity="center_vertical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/clear_button"
-                    android:clickable="false"
-                    android:layout_marginRight="10dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/mode_clear_info" />
+                    android:text="@string/settings_info" />
             </TableRow>
         </TableLayout>
     </RelativeLayout>

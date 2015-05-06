@@ -18,10 +18,12 @@ package com.thomashaertel.regattatimer;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.media.ToneGenerator;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.wearable.view.WatchViewStub;
 import android.view.View;
@@ -30,14 +32,18 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class MainActivity extends Activity {
-    private static final String TIMER_INTERVAL = "tmrint";
-    private static final String TIMER_MODE = "tmrmode";
+import java.util.Map;
+
+public class MainActivity extends Activity implements SharedPreferences.OnSharedPreferenceChangeListener {
+    private static final String PREF_INTERVAL_MODE ="interval_mode";
+    private static final String PREF_TIMER_MODE ="timer_mode";
 
     private TimerInterval mTimerInterval = TimerInterval.M5410;
     private TimerMode mTimerMode = TimerMode.UPDOWN;
 
     private Timer<?> mTimer;
+
+    private SharedPreferences mPrefs;
 
     private Button mProgramButton;
     private Button mClearButton;
@@ -65,14 +71,14 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // prepare access to shared preferences
+        mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+
+        // initialize tone generator and vibrator
         mToneGenerator = new ToneGenerator(AudioManager.STREAM_SYSTEM, ToneGenerator.MAX_VOLUME);
         mVibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
 
-        if(savedInstanceState != null) {
-            mTimerInterval = TimerInterval.valueOf(savedInstanceState.getString(TIMER_INTERVAL, TimerInterval.M5410.name()));
-            mTimerMode = TimerMode.valueOf(savedInstanceState.getString(TIMER_MODE, TimerMode.UPDOWN.name()));
-        }
-
+        // initialize ui binding
         final WatchViewStub stub = (WatchViewStub) findViewById(R.id.watch_view_stub);
         stub.setOnLayoutInflatedListener(new WatchViewStub.OnLayoutInflatedListener() {
             @Override
@@ -85,42 +91,43 @@ public class MainActivity extends Activity {
                 mTimerView = (TextView) stub.findViewById(R.id.timer);
 
                 mSyncButton = (Button) stub.findViewById(R.id.syncButton);
-
                 mProgramButton = (Button) stub.findViewById(R.id.programButton);
-                mProgramButton.setOnLongClickListener(new View.OnLongClickListener() {
-                    public boolean onLongClick(View v) {
-                        onProgramLongClick(v);
-                        return true;
-                    }
-                });
-
                 mClearButton = (Button) stub.findViewById(R.id.clearButton);
-                mClearButton.setOnLongClickListener(new View.OnLongClickListener() {
-                    public boolean onLongClick(View v) {
-                        onClearLongClick(v);
-                        return true;
-
-                    }
-                });
 
                 updateButtonState(false);
-                updateTimerSettings();
+                onSharedPreferenceChanged(mPrefs, null);
             }
         });
+
+        // register preference listener after initialization of ui state
+        mPrefs.registerOnSharedPreferenceChangeListener(this);
     }
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
-
+        mPrefs.unregisterOnSharedPreferenceChangeListener(this);
         mToneGenerator.release();
+
+        super.onDestroy();
     }
 
     @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putString(TIMER_INTERVAL, mTimerInterval.name());
-        outState.putString(TIMER_MODE, mTimerMode.name());
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        try {
+            mTimerInterval = TimerInterval.valueOf(sharedPreferences.getString(PREF_INTERVAL_MODE, TimerInterval.M5410.name()));
+        } catch(IllegalArgumentException e) {
+            mTimerInterval = TimerInterval.M5410;
+            sharedPreferences.edit().putString(PREF_INTERVAL_MODE, mTimerInterval.name()).commit();
+        }
+
+        try {
+            mTimerMode = TimerMode.valueOf(sharedPreferences.getString(PREF_TIMER_MODE, TimerMode.UPDOWN.name()));
+        } catch(IllegalArgumentException e) {
+            mTimerMode = TimerMode.UPDOWN;
+            sharedPreferences.edit().putString(PREF_TIMER_MODE, mTimerMode.name()).commit();
+        }
+
+        updateTimerSettings();
     }
 
     public void onStartStopClick(View view) {
@@ -166,10 +173,15 @@ public class MainActivity extends Activity {
         }
     }
 
-    public void onClearLongClick(View view) {
+/*    public void onClearLongClick(View view) {
         mTimerMode = rotate(mTimerMode, 1);
         updateTimerSettings();
     }
+
+    public void onProgramLongClick(View view) {
+        mTimerInterval = rotate(mTimerInterval, 1);
+        updateTimerSettings();
+    }*/
 
     public void onProgramClick(View view) {
         if(mTimer == null) {
@@ -183,11 +195,6 @@ public class MainActivity extends Activity {
 
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         }
-    }
-
-    public void onProgramLongClick(View view) {
-        mTimerInterval = rotate(mTimerInterval, 1);
-        updateTimerSettings();
     }
 
     public void onTimerClick(View view) {
