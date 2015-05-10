@@ -203,9 +203,7 @@ public abstract class RegattaCountDownTimer implements Timer<RegattaCountDownTim
                     // special case: user's onTick took more than interval to
                     // complete, skip to next interval
                     while (delay < 0) {
-                        Log.d("HANDLER", "onTick took to long: " + delay + "ms");
                         delay += mCountdownInterval;
-
                     }
 
                     sendMessageDelayed(obtainMessage(MSG), delay);
