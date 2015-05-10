@@ -22,9 +22,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/timer"
-        android:textSize="60dp"
+        android:textSize="60sp"
         android:layout_marginLeft="12dp"
         android:layout_marginRight="12dp"
+        android:layout_marginBottom="-5dp"
         android:onClick="onTimerClick"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
@@ -45,7 +46,7 @@
         android:layout_marginBottom="0dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_toRightOf="@id/timerInterval"
+        android:layout_toEndOf="@id/timerInterval"
         android:layout_alignEnd="@id/timer"
         android:layout_below="@id/startStopButton"
         android:layout_alignTop="@id/timerInterval"
@@ -63,7 +64,7 @@
             android:onClick="onTimerClick"
             android:layout_height="match_parent"
             android:adjustViewBounds="true"
-            android:layout_gravity="right"
+            android:layout_gravity="end"
             android:scaleType="fitEnd"
             android:layout_weight="0.125" />
 
@@ -74,7 +75,7 @@
             android:onClick="onTimerClick"
             android:layout_height="match_parent"
             android:adjustViewBounds="true"
-            android:layout_gravity="right"
+            android:layout_gravity="end"
             android:scaleType="fitEnd"
             android:layout_weight="0.125" />
 
@@ -85,7 +86,7 @@
             android:onClick="onTimerClick"
             android:layout_height="match_parent"
             android:adjustViewBounds="true"
-            android:layout_gravity="right"
+            android:layout_gravity="end"
             android:scaleType="fitEnd"
             android:layout_weight="0.125" />
 
@@ -95,7 +96,7 @@
             android:src="@drawable/ic_arrow_up"
             android:onClick="onTimerClick"
             android:layout_height="match_parent"
-            android:layout_gravity="right"
+            android:layout_gravity="end"
             android:adjustViewBounds="true"
             android:scaleType="fitEnd"
             android:layout_weight="0.125" />
@@ -104,11 +105,11 @@
     <Button
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:textSize="15dp"
+        android:textSize="15sp"
         android:text="@string/program"
         android:id="@+id/programButton"
         android:layout_below="@id/timer"
-        android:layout_marginLeft="40dp"
+        android:layout_marginStart="40dp"
         android:layout_alignParentStart="true"
         android:onClick="onProgramClick"
         android:longClickable="true"
@@ -117,8 +118,8 @@
     <Button
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_marginRight="40dp"
-        android:textSize="15dp"
+        android:layout_marginEnd="40dp"
+        android:textSize="15sp"
         android:text="@string/clear"
         android:id="@+id/clearButton"
         android:layout_below="@id/timer"
