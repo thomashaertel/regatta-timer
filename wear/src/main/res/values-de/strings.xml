@@ -21,6 +21,7 @@
         <item>2 Minuten</item>
         <item>1 Minute</item>
     </string-array>
+
     <string-array name="values_interval_modes" tools:translatable="false">
         <item>M5410</item>
         <item>M5</item>
@@ -32,6 +33,7 @@
         <item>Wiederholung</item>
         <item>Auf/Ab</item>
     </string-array>
+
     <string-array name="values_timer_modes" tools:translatable="false">
         <item>REPEATING</item>
         <item>UPDOWN</item>

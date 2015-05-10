@@ -16,7 +16,7 @@
     <string name="title_timer_mode">Timer mode</string>
 
     <string-array name="entries_interval_modes" tools:translatable="false">
-        <item> Sequence: 5, 4, 1, 0</item>
+        <item>Sequence: 5, 4, 1, 0</item>
         <item>5 Minutes</item>
         <item>2 Minutes</item>
         <item>1 Minute</item>
