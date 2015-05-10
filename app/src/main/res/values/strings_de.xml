@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Regatta Timer</string>
+    <string name="app_info">Die Regatta Timer App für Smartwatches verhält sich wie eine Optimum Time Series 3 Regatta Uhr für Segel-Regatten. Sie verfügt über einen Timer und Stopuhr Modus wie die normale Regatta Uhr.</string>
+    <string name="actions">Aktionen:</string>
+    <string name="startstop_button">Start/Stop</string>
+    <string name="startstop_info">Wenn ein Countdown eingestellt ist wird er gestartet oder gestoppt. Andernfalls die Stopuhr.</string>
+    <string name="sync_button">Sync</string>
+    <string name="sync_info">Synchronisiert die Countdown Zeit auf die nächste ganze Minute.</string>
+    <string name="clear_button">CLEAR</string>
+    <string name="clear_info">Setzt den Countdown oder die Stopuhr zurück.</string>
+    <string name="program_button">PROG</string>
+    <string name="program_info">Legt die Countdown Zeit fest.</string>
+    <string name="settings">Einstellungen:</string>
+    <string name="settings_info">Durch Tippen auf die Zeit, während Timer oder Stopuhr gestoppt sind, öffnen sich die Einstellungen. Dort können Timer Intervall und Timer Modus konfiguriert werden. Verfügbare Intervalle sind: 5,4,1,0 / 3M / 2M / 1M.\nBeim Timer Modus kann zwischen Wiederholung und Auf/Ab gewählt werden.</string>
+</resources>

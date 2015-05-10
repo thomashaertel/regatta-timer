@@ -1,0 +1,39 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">Regatta Timer</string>
+    <string name="startStop">Start/Stop</string>
+    <string name="sync">Sync</string>
+    <string name="clear">CLEAR</string>
+    <string name="program">PROG</string>
+    <string name="timer">00:00</string>
+    <string name="mode_5410">5,4,1,0</string>
+    <string name="mode_5M">5M</string>
+    <string name="mode_3M">3M</string>
+    <string name="mode_1M">1M</string>
+    <string name="mode_updown">Auf/Ab</string>
+    <string name="mode_repeat">Wiederholung</string>
+
+    <string name="title_interval_mode">Intervall Modus</string>
+    <string name="title_timer_mode">Timer Modus</string>
+
+    <string-array name="entries_interval_modes" tools:translatable="false">
+        <item>Sequenz: 5, 4, 1, 0</item>
+        <item>5 Minuten</item>
+        <item>2 Minuten</item>
+        <item>1 Minute</item>
+    </string-array>
+    <string-array name="values_interval_modes" tools:translatable="false">
+        <item>M5410</item>
+        <item>M5</item>
+        <item>M2</item>
+        <item>M1</item>
+    </string-array>
+
+    <string-array name="entries_timer_modes" tools:translatable="false">
+        <item>Wiederholung</item>
+        <item>Auf/Ab</item>
+    </string-array>
+    <string-array name="values_timer_modes" tools:translatable="false">
+        <item>REPEATING</item>
+        <item>UPDOWN</item>
+    </string-array>
+</resources>
