@@ -57,13 +57,15 @@ public class MainActivity extends Activity implements SharedPreferences.OnShared
     private ImageView mPlus;
     private ImageView mRepeat;
 
-    private ToneGenerator mToneGenerator;
     private Vibrator mVibrator;
 
     private long mCountDownMillis = 0;
 
-    private final long[] mVibrationPatternMinute = {0, 500, 50, 300};
-    private final long[] mVibrationPatternLastMinute = {0, 500};
+    private final long[] mVibrationPatternCountdownFinished = {0, 1000};
+    private final long[] mVibrationPatternLastMinuteLastSeconds = {0, 125, 50, 125, 50, 125};
+    private final long[] mVibrationPatternMinuteLastSeconds = {0, 125};
+    private final long[] mVibrationPatternMinute = {0, 125, 50, 125, 50, 125, 50, 125};
+    private final long[] mVibrationPatternLastMinute = {0, 200, 50, 200};
     private final long[] mVibrationPatternLastSeconds = {0, 250, 50, 250, 50, 250};
     //-1 - don't repeat
     private final int mIndexInPatternToRepeat = -1;
@@ -76,8 +78,7 @@ public class MainActivity extends Activity implements SharedPreferences.OnShared
         // prepare access to shared preferences
         mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
 
-        // initialize tone generator and vibrator
-        mToneGenerator = new ToneGenerator(AudioManager.STREAM_SYSTEM, ToneGenerator.MAX_VOLUME);
+        // initialize vibrator
         mVibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
 
         // initialize ui binding
@@ -108,7 +109,6 @@ public class MainActivity extends Activity implements SharedPreferences.OnShared
     @Override
     protected void onDestroy() {
         mPrefs.unregisterOnSharedPreferenceChangeListener(this);
-        mToneGenerator.release();
 
         super.onDestroy();
     }
@@ -211,22 +211,19 @@ public class MainActivity extends Activity implements SharedPreferences.OnShared
                 final long secondsUntilFinished = millisUntilFinished / 1000;
                 final long secondsUntilNextMinute = secondsUntilFinished % 60;
 
-                if(secondsUntilNextMinute < 6 && secondsUntilNextMinute > 0) {
-                    mToneGenerator.startTone(ToneGenerator.TONE_PROP_BEEP);
-                    mVibrator.vibrate(mVibrationPatternLastMinute, mIndexInPatternToRepeat);
-                } else if(secondsUntilNextMinute == 0) {
-                    mToneGenerator.startTone(ToneGenerator.TONE_PROP_BEEP);
-                    mVibrator.vibrate(mVibrationPatternMinute, mIndexInPatternToRepeat);
-                } else if(secondsUntilFinished < 60) {
-                    if(secondsUntilFinished % 10 == 0) {
-                        mToneGenerator.startTone(ToneGenerator.TONE_PROP_BEEP);
+                if(secondsUntilFinished < 60) { // Last Minute
+                    if(secondsUntilFinished < 6) {
+                        mVibrator.vibrate(mVibrationPatternLastMinuteLastSeconds, mIndexInPatternToRepeat);
+                    } else if(secondsUntilFinished % 10 == 0 || secondsUntilFinished < 10) {
                         mVibrator.vibrate(mVibrationPatternLastMinute, mIndexInPatternToRepeat);
                     } else if (secondsUntilFinished <= 15) {
-                        mToneGenerator.startTone(ToneGenerator.TONE_PROP_BEEP);
-                        mVibrator.vibrate(mVibrationPatternLastMinute, mIndexInPatternToRepeat);
-                    } else if(secondsUntilFinished < 10) {
-                        mToneGenerator.startTone(ToneGenerator.TONE_PROP_BEEP2);
-                        mVibrator.vibrate(mVibrationPatternLastSeconds, mIndexInPatternToRepeat);
+                        mVibrator.vibrate(mVibrationPatternMinuteLastSeconds, mIndexInPatternToRepeat);
+                    }
+                } else {
+                    if(secondsUntilNextMinute < 6 && secondsUntilNextMinute > 0) {
+                        mVibrator.vibrate(mVibrationPatternMinuteLastSeconds, mIndexInPatternToRepeat);
+                    } else if(secondsUntilNextMinute == 0) {
+                        mVibrator.vibrate(mVibrationPatternMinute, mIndexInPatternToRepeat);
                     }
                 }
 
@@ -234,10 +231,9 @@ public class MainActivity extends Activity implements SharedPreferences.OnShared
             }
 
             public void onFinish() {
-                updateTimer(0);
+                mVibrator.vibrate(mVibrationPatternCountdownFinished, mIndexInPatternToRepeat);
 
-                mToneGenerator.startTone(ToneGenerator.TONE_PROP_BEEP);
-                mVibrator.vibrate(mVibrationPatternMinute, mIndexInPatternToRepeat);
+                updateTimer(0);
 
                 if(mTimerMode == TimerMode.REPEATING) {
                     mTimer.start();

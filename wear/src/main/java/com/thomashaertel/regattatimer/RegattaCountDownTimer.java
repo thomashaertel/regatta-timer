@@ -19,6 +19,7 @@ package com.thomashaertel.regattatimer;
 import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
+import android.util.Log;
 
 /**
  * Schedule a countdown until a time in the future, with
@@ -183,7 +184,8 @@ public abstract class RegattaCountDownTimer implements Timer<RegattaCountDownTim
                     return;
                 }
 
-                final long millisLeft = mStopTimeInFuture - SystemClock.elapsedRealtime();
+                final long lastTickStart = SystemClock.elapsedRealtime();
+                final long millisLeft = mStopTimeInFuture - lastTickStart;
 
                 mMillisLeft = millisLeft;
 
@@ -193,7 +195,6 @@ public abstract class RegattaCountDownTimer implements Timer<RegattaCountDownTim
                     // no tick, just delay until done
                     sendMessageDelayed(obtainMessage(MSG), millisLeft);
                 } else {
-                    long lastTickStart = SystemClock.elapsedRealtime();
                     onTick(millisLeft);
 
                     // take into account user's onTick taking time to execute
@@ -201,7 +202,11 @@ public abstract class RegattaCountDownTimer implements Timer<RegattaCountDownTim
 
                     // special case: user's onTick took more than interval to
                     // complete, skip to next interval
-                    while (delay < 0) delay += mCountdownInterval;
+                    while (delay < 0) {
+                        Log.d("HANDLER", "onTick took to long: " + delay + "ms");
+                        delay += mCountdownInterval;
+
+                    }
 
                     sendMessageDelayed(obtainMessage(MSG), delay);
                 }
